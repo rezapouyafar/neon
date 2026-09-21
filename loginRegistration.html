@@ -1,144 +1,25 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ورود به حساب کاربری نئون‌ساز با ایمیل یا شماره موبایل">
-  <title>ورود به حساب | نئون‌ساز</title>
-  <link rel="stylesheet" href="public/css/neon-store.css">
-  <style>
-    :root {
-      --bg: #f5f7fb;
-      --surface: #ffffff;
-      --text: #172033;
-      --muted: #788196;
-      --border: #e5e9f2;
-      --accent: #635bff;
-      --accent-dark: #5048e8;
-      --soft-accent: #eeedff;
-    }
-
-    * { box-sizing: border-box; }
-    html { font-family: Tahoma, Arial, sans-serif; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--text);
-      background: var(--bg);
-      font-family: Tahoma, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-    button, input { font: inherit; }
-    a { color: inherit; text-decoration: none; }
-
-    .auth-page {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      direction: ltr;
-    }
-    .visual {
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-      padding: clamp(32px, 6vw, 88px);
-      color: #fff;
-      background:
-        linear-gradient(145deg, rgba(16, 22, 46, .72), rgba(35, 26, 82, .9)),
-        radial-gradient(circle at 20% 20%, #766cff 0, transparent 34%),
-        linear-gradient(135deg, #11172c, #282052 70%, #17152d);
-    }
-    .visual::before,
-    .visual::after {
-      content: "";
-      position: absolute;
-      border: 1px solid rgba(255,255,255,.13);
-      border-radius: 50%;
-    }
-    .visual::before { width: 520px; height: 520px; top: -210px; left: -180px; }
-    .visual::after { width: 680px; height: 680px; bottom: -420px; right: -320px; }
-    .visual-content { position: relative; z-index: 1; direction: rtl; max-width: 430px; }
-    .logo { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 70px; font-size: 1.35rem; font-weight: 700; }
-    .logo-mark { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); }
-    .visual h1 { margin: 0 0 20px; font-size: clamp(2rem, 3.5vw, 3.4rem); line-height: 1.55; letter-spacing: -.04em; }
-    .visual p { margin: 0; color: rgba(255,255,255,.7); line-height: 2.1; font-size: .98rem; }
-    .visual-note { display: flex; align-items: center; gap: 10px; margin-top: 34px; color: rgba(255,255,255,.8); font-size: .82rem; }
-    .visual-note span { color: #b9b4ff; font-size: 1.1rem; }
-
-    .form-side { display: grid; place-items: center; padding: 32px; direction: rtl; }
-    .auth-card { width: min(100%, 430px); }
-    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: .8rem; margin-bottom: 60px; transition: color .2s; }
-    .back-link:hover { color: var(--accent); }
-    .heading { margin-bottom: 34px; }
-    .heading h2 { margin: 0 0 13px; font-size: 1.85rem; letter-spacing: -.035em; }
-    .heading p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 2; }
-    .field { display: grid; gap: 11px; margin-bottom: 18px; color: var(--text); font-size: .84rem; font-weight: 700; }
-    .field input { width: 100%; height: 56px; padding: 0 17px; border: 1px solid var(--border); border-radius: 14px; outline: none; color: var(--text); background: var(--surface); direction: rtl; transition: border-color .2s, box-shadow .2s; }
-    .field input::placeholder { color: #a8afbf; }
-    .field input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(99,91,255,.1); }
-    .submit { width: 100%; height: 56px; border: 0; border-radius: 14px; background: var(--accent); color: #fff; font-weight: 700; cursor: pointer; transition: background .2s, transform .2s; }
-    .submit:hover { background: var(--accent-dark); transform: translateY(-1px); }
-    .helper { margin: 16px 0 0; color: var(--muted); font-size: .76rem; line-height: 2; text-align: center; }
-    .helper a { color: var(--accent); font-weight: 700; }
-    .result { min-height: 22px; margin: 18px 0 0; color: var(--accent); font-size: .8rem; text-align: center; line-height: 1.9; }
-    .footer-note { margin-top: 54px; color: #a1a9ba; font-size: .72rem; text-align: center; }
-
-    @media (max-width: 800px) {
-      .auth-page { grid-template-columns: 1fr; }
-      .visual { min-height: 290px; padding: 30px; align-items: center; }
-      .logo { margin-bottom: 28px; }
-      .visual h1 { font-size: 2rem; }
-      .visual p { font-size: .85rem; }
-      .visual-note { display: none; }
-      .form-side { padding: 34px 24px 45px; }
-      .back-link { margin-bottom: 42px; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ورود به حساب کاربری نئون‌ساز با ایمیل یا شماره موبایل">
+<meta name="theme-color" content="#08090d">
+<title>ورود | نئون‌ساز</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{font-family:"Vazirmatn",Tahoma,Arial,sans-serif;--bg:#08090d;--surface:#101218;--surface2:#151821;--text:#f6f7fb;--muted:#9298a7;--border:rgba(255,255,255,.09);--accent:#7c83ff}*{box-sizing:border-box}html{font-family:"Vazirmatn",Tahoma,Arial,sans-serif}body{margin:0;min-height:100vh;font-family:"Vazirmatn",Tahoma,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at 12% 10%,rgba(104,112,255,.14),transparent 30%),radial-gradient(circle at 90% 90%,rgba(162,85,255,.12),transparent 30%),var(--bg);-webkit-font-smoothing:antialiased}button,input{font:inherit}a{text-decoration:none;color:inherit}.page{min-height:100vh;display:grid;place-items:center;padding:24px}.card{width:min(100%,470px);padding:46px 44px;background:rgba(16,18,24,.92);border:1px solid var(--border);border-radius:26px;box-shadow:0 30px 90px rgba(0,0,0,.45);backdrop-filter:blur(18px)}.brand{display:flex;align-items:center;gap:11px;margin-bottom:54px;font-weight:800;font-size:19px}.mark{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#7ee8ff,#7c83ff);color:#080b12;box-shadow:0 0 30px rgba(124,131,255,.25)}.back{display:inline-block;margin-bottom:28px;color:#777e8d;font-size:12px}.back:hover{color:#aeb5ff}.eyebrow{margin-bottom:10px;color:#8991ff;font-size:11px;font-weight:700}.heading h1{margin:0 0 10px;font-size:28px;letter-spacing:-.6px}.heading p{margin:0 0 30px;color:var(--muted);font-size:13px;line-height:2}.field{display:block;margin-bottom:16px;font-size:12px;font-weight:700}.input{display:block;width:100%;height:58px;margin-top:9px;padding:0 17px;border:1px solid var(--border);border-radius:14px;background:var(--surface2);color:#fff;outline:0;direction:rtl;transition:.2s}.input::placeholder{color:#666d7b}.input:focus{border-color:#737cff;box-shadow:0 0 0 4px rgba(124,131,255,.1)}.submit{width:100%;height:58px;border:0;border-radius:14px;background:linear-gradient(135deg,#707aff,#916cf0);color:#fff;font-weight:700;cursor:pointer;transition:.2s;box-shadow:0 12px 30px rgba(124,131,255,.18)}.submit:hover{transform:translateY(-1px);filter:brightness(1.07)}.result{min-height:20px;margin:16px 0 0;color:#8991ff;font-size:11px;text-align:center;line-height:1.9}.terms{margin:22px 0 0;color:#666d7b;font-size:10px;line-height:2;text-align:center}.terms a{color:#a1a8ff}.secure{margin-top:30px;padding-top:18px;border-top:1px solid rgba(255,255,255,.06);color:#555c69;text-align:center;font-size:10px}@media(max-width:500px){.page{padding:14px}.card{padding:34px 23px;border-radius:22px}.brand{margin-bottom:42px}.heading h1{font-size:25px}}
+</style>
 </head>
 <body>
-  <main class="auth-page">
-    <section class="visual" aria-label="معرفی نئون‌ساز">
-      <div class="visual-content">
-        <a class="logo" href="index.html"><span class="logo-mark">✦</span><span>نئون‌ساز</span></a>
-        <h1>ایده‌های روشن،<br>تجربه‌ای متفاوت.</h1>
-        <p>برای مدیریت سفارش‌ها، پیگیری پروژه‌ها و ادامه مسیر طراحی تابلوی اختصاصی خود وارد شوید.</p>
-        <div class="visual-note"><span>✦</span> طراحی خاص برای برندهای خاص</div>
-      </div>
-    </section>
-
-    <section class="form-side" aria-label="فرم ورود">
-      <div class="auth-card">
-        <a class="back-link" href="index.html">← بازگشت به فروشگاه</a>
-        <div class="heading">
-          <h2>خوش آمدید</h2>
-          <p>ایمیل یا شماره موبایل خود را وارد کنید تا ادامه دهید.</p>
-        </div>
-        <form id="identity-form" novalidate>
-          <label class="field" for="identity">ایمیل یا شماره موبایل
-            <input id="identity" name="identity" type="text" inputmode="email" autocomplete="username" placeholder="ایمیل یا شماره موبایل شما" required>
-          </label>
-          <button class="submit" type="submit">ادامه</button>
-        </form>
-        <p class="result" id="result" role="status" aria-live="polite"></p>
-        <p class="helper">با ادامه، <a href="#">شرایط استفاده</a> و <a href="#">حریم خصوصی</a> را می‌پذیرید.</p>
-        <p class="footer-note">نئون‌ساز؛ جایی برای روشن‌تر دیده شدن شما</p>
-      </div>
-    </section>
-  </main>
-  <script>
-    document.getElementById('identity-form').addEventListener('submit', function (event) {
-      event.preventDefault();
-      const input = document.getElementById('identity');
-      const result = document.getElementById('result');
-      const value = input.value.trim();
-      if (!value) {
-        input.focus();
-        result.textContent = 'لطفاً ایمیل یا شماره موبایل خود را وارد کنید.';
-        return;
-      }
-      result.textContent = 'اطلاعات واردشده آماده ارسال است. برای اتصال واقعی، سرویس احراز هویت را متصل کنید.';
-    });
-  </script>
-</body>
-</html>
+<main class="page"><section class="card" aria-label="ورود به حساب کاربری">
+<a class="back" href="index.html">← بازگشت به فروشگاه</a>
+<div class="brand"><span class="mark">N</span><span>نئون‌ساز</span></div>
+<div class="heading"><div class="eyebrow">حساب کاربری</div><h1>خوش آمدید</h1><p>برای ورود، ایمیل یا شماره موبایل خود را وارد کنید.</p></div>
+<form id="identity-form" novalidate><label class="field" for="identity">ایمیل یا شماره موبایل<input class="input" id="identity" name="identity" type="text" inputmode="email" autocomplete="username" placeholder="ایمیل یا شماره موبایل شما" required></label><button class="submit" type="submit">ادامه</button></form>
+<p class="result" id="result" role="status" aria-live="polite"></p><p class="terms">با ادامه، <a href="#">شرایط استفاده</a> و <a href="#">حریم خصوصی</a> را می‌پذیرید.</p><div class="secure">اتصال امن · نئون‌ساز</div>
+</section></main>
+<script>document.getElementById('identity-form').addEventListener('submit',function(e){e.preventDefault();const i=document.getElementById('identity'),r=document.getElementById('result'),v=i.value.trim();if(!v){r.textContent='لطفاً ایمیل یا شماره موبایل را وارد کنید.';i.focus();return}r.textContent='اطلاعات واردشده آماده ارسال است.'});</script>
+</body></html>
