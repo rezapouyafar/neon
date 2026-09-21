@@ -1,65 +1,15 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-    <title>تأیید کد | سوغات قائنات</title>
-    <base href="./">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="public/images/favicon.png">
-    <link rel="stylesheet" href="public/css/bootstrap-rtl.css">
-    <link rel="stylesheet" href="public/css/style.css">
-    <link rel="stylesheet" href="public/css/redesign.css">
-    <link rel="stylesheet" href="public/css/auth-recovery.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-</head>
-<body class="recovery-page">
-<main class="recovery-shell">
-    <div class="recovery-layout">
-        <section class="recovery-brand-panel">
-            <a class="recovery-brand" href="index.html"><img src="public/images/logo.png" alt="سوغات قائنات"><span>سوغات قائنات</span></a>
-            <div class="brand-orbit brand-orbit-one"></div><div class="brand-orbit brand-orbit-two"></div>
-            <div class="recovery-brand-content">
-                <span class="recovery-kicker"><i class="fas fa-sparkles"></i> فقط یک قدم تا ورود</span>
-                <h1>کد را وارد کنید، خرید ادامه دارد.</h1>
-                <p>کد ارسال‌شده را وارد کنید تا حساب شما با امنیت کامل آماده شود.</p>
-                <div class="recovery-benefits"><span><i class="fas fa-lock"></i> کد یک‌بارمصرف</span><span><i class="fas fa-clock"></i> اعتبار محدود</span><span><i class="fas fa-check"></i> فعال‌سازی سریع</span></div>
-            </div>
-            <div class="recovery-brand-footer"><span>مرحله ۲ از ۲</span><span class="brand-line"></span><span>تأیید هویت</span></div>
-        </section>
-        <section class="recovery-card" aria-label="تأیید کد">
-            <div class="recovery-card-top"><span class="recovery-step">۰۲</span><span>تأیید هویت</span></div>
-            <div class="recovery-card-heading"><span class="recovery-icon"><i class="fas fa-shield-check"></i></span><div><h2>کد تأیید را وارد کنید</h2><p id="deliveryMessage">کد ۵ رقمی ارسال‌شده را وارد کنید.</p></div></div>
-            <form class="recovery-form verification-form" id="otpForm" novalidate>
-                <div class="otp-inputs" aria-label="ورودی کد پنج رقمی"><input class="otp-input" type="text" maxlength="1" inputmode="numeric" aria-label="رقم اول"><input class="otp-input" type="text" maxlength="1" inputmode="numeric" aria-label="رقم دوم"><input class="otp-input" type="text" maxlength="1" inputmode="numeric" aria-label="رقم سوم"><input class="otp-input" type="text" maxlength="1" inputmode="numeric" aria-label="رقم چهارم"><input class="otp-input" type="text" maxlength="1" inputmode="numeric" aria-label="رقم پنجم"></div>
-                <div class="otp-meta"><span><i class="fas fa-hourglass-half"></i> زمان باقی‌مانده</span><strong id="countdown">01:30</strong></div>
-                <button type="button" id="resendCodeBtn" class="recovery-secondary">ارسال مجدد کد</button>
-                <button type="submit" class="recovery-primary">تأیید و ورود <i class="fas fa-arrow-left"></i></button>
-            </form>
-            <div class="invite-status" id="inviteStatus" hidden><i class="fas fa-gift"></i><span>کد دعوت شما ثبت شده و پس از ورود فعال می‌شود.</span></div>
-            <a class="recovery-back-link" href="recoverAccount.html"><i class="fas fa-chevron-right"></i> ویرایش ایمیل یا شماره موبایل</a>
-            <p class="recovery-legal">کد را با هیچ‌کس به اشتراک نگذارید.</p>
-        </section>
-    </div>
-</main>
-<script>
-    (function () {
-        var params = new URLSearchParams(window.location.search);
-        var contact = params.get('contact') || '';
-        var invite = params.get('invite') || params.get('ref') || params.get('referral') || '';
-        if (contact) document.getElementById('deliveryMessage').textContent = 'کد ۵ رقمی برای ' + (contact.length > 6 ? contact.slice(0, 3) + '***' + contact.slice(-3) : contact) + ' ارسال شد.';
-        if (invite) document.getElementById('inviteStatus').hidden = false;
-        var inputs = Array.from(document.querySelectorAll('.otp-input'));
-        inputs.forEach(function (input, index) {
-            input.addEventListener('input', function () { input.value = input.value.replace(/\D/g, '').slice(0, 1); if (input.value && inputs[index + 1]) inputs[index + 1].focus(); });
-            input.addEventListener('keydown', function (event) { if (event.key === 'Backspace' && !input.value && inputs[index - 1]) inputs[index - 1].focus(); if (event.key === 'ArrowLeft' && inputs[index - 1]) inputs[index - 1].focus(); if (event.key === 'ArrowRight' && inputs[index + 1]) inputs[index + 1].focus(); });
-            input.addEventListener('paste', function (event) { var pasted = (event.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 5); if (!pasted) return; event.preventDefault(); pasted.split('').forEach(function (digit, digitIndex) { if (inputs[digitIndex]) inputs[digitIndex].value = digit; }); inputs[Math.min(pasted.length, inputs.length) - 1].focus(); });
-        });
-        var seconds = 90, timer, countdown = document.getElementById('countdown'), resend = document.getElementById('resendCodeBtn');
-        function tick() { countdown.textContent = String(Math.floor(seconds / 60)).padStart(2, '0') + ':' + String(seconds % 60).padStart(2, '0'); if (seconds <= 0) { clearInterval(timer); resend.style.display = 'block'; } else seconds -= 1; }
-        function startTimer() { clearInterval(timer); seconds = 90; resend.style.display = 'none'; tick(); timer = setInterval(tick, 1000); }
-        startTimer(); resend.addEventListener('click', startTimer);
-        document.getElementById('otpForm').addEventListener('submit', function (event) { event.preventDefault(); if (inputs.some(function (input) { return !input.value; })) { inputs.find(function (input) { return !input.value; }).focus(); return; } window.location.href = 'panel.html'; });
-    }());
-</script>
-</body>
-</html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#08090d">
+<title>تأیید کد | نئون‌ساز</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{font-family:"Vazirmatn",Tahoma,sans-serif}body{margin:0;min-height:100vh;background:radial-gradient(circle at 10% 10%,#202348 0,transparent 32%),radial-gradient(circle at 90% 90%,#27183e 0,transparent 35%),#08090d;color:#f7f8fb}.page{min-height:100vh;display:grid;place-items:center;padding:20px}.card{width:min(100%,470px);padding:44px;background:rgba(16,18,25,.94);border:1px solid rgba(255,255,255,.09);border-radius:26px;box-shadow:0 30px 90px #0008}.brand{display:flex;align-items:center;gap:11px;margin-bottom:52px;font-size:19px;font-weight:800}.mark{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#7ee8ff,#7c83ff);color:#080b12}.back{display:inline-block;color:#7f8797;font-size:12px;margin-bottom:28px}.back:hover{color:#aeb5ff}.eyebrow{font-size:11px;font-weight:700;color:#8991ff;margin-bottom:10px}.heading h1{font-size:27px;margin:0 0 12px}.heading p{font-size:13px;color:#9298a7;line-height:2;margin:0 0 30px}.otp{display:flex;direction:ltr;gap:10px;margin-bottom:20px}.otp input{width:100%;height:64px;min-width:0;text-align:center;font:700 25px "Vazirmatn",sans-serif;color:#fff;background:#151821;border:1px solid rgba(255,255,255,.1);border-radius:14px;outline:0}.otp input:focus{border-color:#7c83ff;box-shadow:0 0 0 4px #7c83ff18}.meta{display:flex;justify-content:space-between;align-items:center;color:#858c9c;font-size:11px;margin-bottom:24px}.meta strong{color:#aeb5ff;font-size:14px;direction:ltr}.btn{width:100%;height:58px;border:0;border-radius:14px;background:linear-gradient(135deg,#707aff,#916cf0);color:#fff;font:700 13px "Vazirmatn",sans-serif;cursor:pointer}.btn:disabled{opacity:.5;cursor:not-allowed}.resend{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:transparent;color:#aeb5ff;font:600 12px "Vazirmatn",sans-serif;cursor:pointer}.resend:disabled{color:#555c69;cursor:not-allowed}.result{min-height:22px;text-align:center;color:#aeb5ff;font-size:11px;margin:16px 0}.footer{border-top:1px solid #ffffff0d;margin-top:28px;padding-top:18px;text-align:center;color:#5e6573;font-size:10px}@media(max-width:500px){.card{padding:34px 22px;border-radius:22px}.otp{gap:7px}.otp input{height:57px;font-size:21px}}
+</style></head>
+<body><main class="page"><section class="card" aria-label="تأیید کد">
+<a class="back" href="loginRegistration.html">← ویرایش ایمیل یا شماره موبایل</a><div class="brand"><span class="mark">N</span><span>نئون‌ساز</span></div>
+<div class="heading"><div class="eyebrow">تأیید هویت · مرحله دوم</div><h1>کد تأیید را وارد کنید</h1><p>کد پنج‌رقمی ارسال‌شده را در کادرهای زیر وارد کنید.</p></div>
+<form id="otpForm" novalidate><div class="otp" aria-label="کد پنج رقمی"><input maxlength="1" inputmode="numeric" aria-label="رقم اول" autofocus><input maxlength="1" inputmode="numeric" aria-label="رقم دوم"><input maxlength="1" inputmode="numeric" aria-label="رقم سوم"><input maxlength="1" inputmode="numeric" aria-label="رقم چهارم"><input maxlength="1" inputmode="numeric" aria-label="رقم پنجم"></div><div class="meta"><span>زمان باقی‌مانده</span><strong id="timer">01:30</strong></div><button class="resend" id="resend" type="button" disabled>ارسال مجدد کد</button><button class="btn" type="submit">تأیید و ادامه</button></form><p class="result" id="result" role="status"></p><div class="footer">کد تأیید خود را با هیچ‌کس به اشتراک نگذارید.</div>
+</section></main>
+<script>(function(){const fields=[...document.querySelectorAll('.otp input')],timerEl=document.getElementById('timer'),resend=document.getElementById('resend'),result=document.getElementById('result');fields.forEach((f,i)=>{f.addEventListener('input',()=>{f.value=f.value.replace(/\D/g,'').slice(0,1);if(f.value&&fields[i+1])fields[i+1].focus()});f.addEventListener('keydown',e=>{if(e.key==='Backspace'&&!f.value&&fields[i-1])fields[i-1].focus()});f.addEventListener('paste',e=>{const v=(e.clipboardData.getData('text')||'').replace(/\D/g,'').slice(0,5);if(!v)return;e.preventDefault();v.split('').forEach((d,j)=>{if(fields[j])fields[j].value=d});fields[Math.min(v.length,5)-1].focus()})});let seconds=90,interval;function start(){clearInterval(interval);seconds=90;resend.disabled=true;render();interval=setInterval(()=>{seconds--;render();if(seconds<=0){clearInterval(interval);resend.disabled=false}},1000)}function render(){timerEl.textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0')}start();resend.addEventListener('click',()=>{result.textContent='کد جدید درخواست شد.';start()});document.getElementById('otpForm').addEventListener('submit',e=>{e.preventDefault();if(fields.some(f=>!f.value)){result.textContent='لطفاً هر پنج رقم کد را وارد کنید.';fields.find(f=>!f.value).focus();return}result.textContent='کد آماده بررسی است.'})})();</script></body></html>
